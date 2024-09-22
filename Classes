@@ -1,0 +1,27 @@
+public class Cliente {
+    private String nome;
+    private String telefone;
+    private String endereco;
+
+    // Construtores, getters e setters
+}
+
+public class Agenda {
+    private String data;
+    private String horario;
+    private Cliente cliente;
+    private String servico;
+
+    // Construtores, getters e setters
+}
+
+public class Custo {
+    private double custoMaterial;
+    private double custoDeslocamento;
+
+    public double calcularTotal() {
+        return custoMaterial + custoDeslocamento;
+    }
+
+    // Construtores, getters e setters
+}
