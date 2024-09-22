@@ -1,0 +1,23 @@
+public class MainActivity extends AppCompatActivity {
+    private DatabaseHelper dbHelper;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        dbHelper = new DatabaseHelper(this);
+
+        // Exemplo de uso: cadastrar cliente
+        cadastrarCliente("João", "123456789", "Rua A");
+    }
+
+    private void cadastrarCliente(String nome, String telefone, String endereco) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nome", nome);
+        values.put("telefone", telefone);
+        values.put("endereco", endereco);
+        db.insert("clientes", null, values);
+    }
+}
