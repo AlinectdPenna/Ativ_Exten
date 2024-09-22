@@ -1,0 +1,23 @@
+public class DatabaseHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "podologia.db";
+    private static final int DATABASE_VERSION = 1;
+
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE clientes (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, telefone TEXT, endereco TEXT)");
+        db.execSQL("CREATE TABLE agenda (id INTEGER PRIMARY KEY AUTOINCREMENT, data TEXT, horario TEXT, clienteId INTEGER, servico TEXT, FOREIGN KEY(clienteId) REFERENCES clientes(id))");
+        db.execSQL("CREATE TABLE custos (id INTEGER PRIMARY KEY AUTOINCREMENT, custoMaterial REAL, custoDeslocamento REAL, agendaId INTEGER, FOREIGN KEY(agendaId) REFERENCES agenda(id))");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS clientes");
+        db.execSQL("DROP TABLE IF EXISTS agenda");
+        db.execSQL("DROP TABLE IF EXISTS custos");
+        onCreate(db);
+    }
+}
